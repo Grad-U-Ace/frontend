@@ -1,12 +1,12 @@
 "use client";
 
+import { generateThumbnail } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 
 // Define the shape of the data
 export type Product = {
   id: string;
   name: string;
-  thumbnail: string;
   price: number;
   description: string;
 };
@@ -21,7 +21,7 @@ export const columns: ColumnDef<Product>[] = [
     header: "Thumbnail",
     cell: ({ row }) => (
       <img
-        src={row.original.thumbnail}
+        src={generateThumbnail(row.original.id, row.original.name)}
         alt={row.original.name}
         className="size-12 rounded-full"
       />
