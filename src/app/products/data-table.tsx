@@ -66,8 +66,9 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() ? "selected" : undefined}
-                  onClick={() =>
-                    setProductID((row.original as { id: string }).id)
+                  onClick={() =>{
+                    setProductID((row.original as { id: string }).id);
+                  }
                   }
                   className="cursor-pointer text-zinc-100 hover:bg-white/5 border-white/10"
                 >

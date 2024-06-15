@@ -10,21 +10,22 @@ import {
 import { cn } from "@/lib/utils";
 import { useAtom } from "jotai";
 import { olshopAtom, productAtom } from "../../atoms";
+import type { Ecommerce } from "../types";
 import MessageList from "./MessageList";
 
-export default function Sidebar() {
+export default function Sidebar({ data }: { data: Ecommerce[] }) {
   const [value, setValue] = useAtom(olshopAtom);
   const [productID, setProductID] = useAtom(productAtom);
 
   const getColor = (value: string) => {
     switch (value) {
-      case "tokopedia":
+      case "Tokopedia":
         return "bg-emerald-500 border-emerald-500";
-      case "shopee":
+      case "Shopee":
         return "bg-orange-500 border-orange-500";
-      case "lazada":
+      case "Lazada":
         return "bg-purple-500 border-purple-500";
-      case "blibli":
+      case "Blibli":
         return "bg-blue-500 border-blue-500";
     }
   };
@@ -44,32 +45,32 @@ export default function Sidebar() {
           </SelectTrigger>
           <SelectContent className="border-none bg-white/10 text-white backdrop-blur-xl">
             <SelectItem
-              value="tokopedia"
+              value="Tokopedia"
               className="cursor-pointer transition-colors focus:bg-white/20 focus:text-white"
             >
               Tokopedia
             </SelectItem>
             <SelectItem
-              value="shopee"
+              value="Shopee"
               className="cursor-pointer transition-colors focus:bg-white/20 focus:text-white"
             >
               Shopee
             </SelectItem>
             <SelectItem
-              value="lazada"
+              value="Lazada"
               className="cursor-pointer transition-colors focus:bg-white/20 focus:text-white"
             >
               Lazada
             </SelectItem>
             <SelectItem
-              value="blibli"
+              value="Blibli"
               className="cursor-pointer transition-colors focus:bg-white/20 focus:text-white"
             >
               Blibli
             </SelectItem>
           </SelectContent>
         </Select>
-        <MessageList id={productID} />
+        <MessageList id={productID} data={data}/>
       </div>
     </aside>
   );

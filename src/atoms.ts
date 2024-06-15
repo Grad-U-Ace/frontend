@@ -1,4 +1,5 @@
 import { atom } from "jotai";
 
-export const olshopAtom = atom("tokopedia");
+// Then use it in your atom
+export const olshopAtom = atom("Tokopedia");
 export const productAtom = atom("");

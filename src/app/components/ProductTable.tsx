@@ -1,15 +1,17 @@
 "use client";
 
 import { olshopAtom } from "@/atoms";
-import { ecommerceData } from "@/data";
 import { useAtom } from "jotai";
-import { columns, Product } from "../products/columns";
 import { DataTable } from "../products/data-table";
+import { Ecommerce, Product as ProductType } from "../types";
+import { columns } from "../products/columns";
 
-export default function ProductTable() {
-  const [olshop, setOlshop] = useAtom(olshopAtom);
-  const store = ecommerceData.stores.find((store) => store.name === olshop);
-  const storeData: Product[] = store ? store.products : [];
+export default function ProductTable({ data }: { data: Ecommerce[] }) {
+  const [olshop] = useAtom(olshopAtom);
 
-  return <DataTable columns={columns} data={storeData} />;
+  const store = data.find((store: Ecommerce) => store.name === olshop);
+  console.log(store);
+
+  // Assuming that DataTable accepts an array of products
+  return <DataTable columns={columns} data={store?.products || []} />;
 }

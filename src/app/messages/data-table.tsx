@@ -1,32 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import {
   ColumnDef,
-  flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useRouter } from "next/navigation";
 import MessageDrawer from "../components/MessageDrawer";
 
 interface DataTableProps<TData, TValue> {
@@ -44,14 +24,16 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
-  const router = useRouter();
+  console.log(data);
 
   return (
     <div className="">
       <Table>
         <TableBody>
           {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => <MessageDrawer row={row} />)
+            table
+              .getRowModel()
+              .rows.map((row, index) => <MessageDrawer key={index} row={row} />)
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
