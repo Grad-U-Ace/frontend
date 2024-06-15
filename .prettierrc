@@ -1,0 +1,14 @@
+{
+  "plugins": ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+  "tailwindAttributes": [
+    "enter",
+    "enterFrom",
+    "enterTo",
+    "leave",
+    "leaveFrom",
+    "leaveTo",
+    ".*Variants.*",
+    ".*Mapping.*"
+  ],
+  "tailwindFunctions": ["clsx", "cn", "cva", "join"]
+}
