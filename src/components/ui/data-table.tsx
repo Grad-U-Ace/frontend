@@ -17,6 +17,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { useRouter } from 'next/navigation'
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -32,6 +34,7 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
+  const router = useRouter()
 
   return (
     <div>
@@ -61,6 +64,8 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => router.push('/products/' + row.id)}
+                  className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
