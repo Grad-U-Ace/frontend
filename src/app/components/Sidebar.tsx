@@ -31,7 +31,8 @@ export default function Sidebar() {
 
   return (
     <aside className="h-svh p-5">
-      <div className="relative flex h-full w-[280px] flex-col items-center overflow-hidden rounded-xl bg-zinc-900 px-3 py-20 before:pointer-events-none before:absolute before:left-1/2 before:z-0 before:size-[600px] before:-translate-x-1/2 before:-translate-y-[90%] before:rounded-full before:bg-white/5 before:blur-[80px]">
+      <div className="relative flex h-full w-[280px] flex-col items-center gap-10 overflow-hidden rounded-xl bg-zinc-900 px-3 pt-5 before:pointer-events-none before:absolute before:left-1/2 before:z-0 before:size-[600px] before:-translate-x-1/2 before:-translate-y-[90%] before:rounded-full before:bg-white/10 before:blur-[80px]">
+        <p className="font-semibold">Bangtuin</p>
         <Select value={value} onValueChange={setValue}>
           <SelectTrigger
             className={cn(
@@ -68,7 +69,7 @@ export default function Sidebar() {
             </SelectItem>
           </SelectContent>
         </Select>
-        <MessageList id={productID}/>
+        <MessageList id={productID} />
       </div>
     </aside>
   );

@@ -61,7 +61,7 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "accordion-left": "accordion-left 0.2s ease-out",
         "accordion-right": "accordion-right 0.2s ease-out",
-        aurora: "aurora 60s linear infinite",
+        aurora: "aurora 120s linear infinite",
       },
     },
   },
