@@ -18,7 +18,7 @@ export default function Home() {
           ease: "easeInOut",
         }}
       >
-        <h1 className="text-4xl font-semibold">Daftar produk</h1>
+        <h1 className="text-4xl font-semibold text-white">Daftar produk</h1>
         <ProductTable />
       </motion.main>
     </AuroraBackground>

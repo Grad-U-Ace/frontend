@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "flex min-h-svh bg-zinc-950 text-white",
+          "flex min-h-svh bg-zinc-950",
           urbanist.className,
         )}
       >

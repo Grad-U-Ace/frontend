@@ -1,6 +1,6 @@
 "use client";
 
-import { olshopAtom } from "@/atoms";
+import { olshopAtom, productAtom } from "@/atoms";
 import { ecommerceData } from "@/data";
 import { useAtom } from "jotai";
 import { columns } from "../messages/columns";
@@ -20,6 +20,7 @@ interface Product {
 
 export default function MessageList({ id }: { id: string }) {
   const [olshop, setOlshop] = useAtom(olshopAtom);
+  const [productID, setProductID] = useAtom(productAtom);
 
   // Find the store based on olshop
   const store = ecommerceData.stores.find((store) => store.name === olshop);
@@ -32,7 +33,11 @@ export default function MessageList({ id }: { id: string }) {
   const product = store.products.find((product) => product.id === id);
 
   if (!product) {
-    return <div>Pilih produk</div>;
+    return (
+      <div className="relative flex aspect-square w-full items-center justify-center rounded-xl border border-zinc-800 bg-zinc-800 text-zinc-300 shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.05)] shadow-white/20 before:absolute before:inset-0 before:shadow-xl before:shadow-zinc-950/60">
+        Pilih produk
+      </div>
+    );
   }
 
   // Get messages only for the specific product
@@ -40,7 +45,11 @@ export default function MessageList({ id }: { id: string }) {
 
   return (
     <div className="w-full">
-      <h1>Message List</h1>
+      <div className="relative mb-10 flex aspect-video w-full items-center justify-center rounded-xl border border-zinc-800 bg-zinc-800 text-zinc-300 shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.05)] shadow-white/20 before:absolute before:inset-0 before:shadow-xl before:shadow-zinc-950/60">
+        {/* Display the product name */}
+        <span className="text-xl font-medium">{product.name}</span>
+      </div>
+      <p className="font-medium text-white">Message List</p>
 
       <DataTable columns={columns} data={storeData} />
     </div>

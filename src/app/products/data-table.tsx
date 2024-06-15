@@ -44,10 +44,10 @@ export function DataTable<TData, TValue>({
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="pointer-events-none">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-white/40 border-white/10">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -69,7 +69,7 @@ export function DataTable<TData, TValue>({
                   onClick={() =>
                     setProductID((row.original as { id: string }).id)
                   }
-                  className="cursor-pointer"
+                  className="cursor-pointer text-zinc-100 hover:bg-white/5 border-white/10"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

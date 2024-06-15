@@ -29,7 +29,7 @@ export const columns: ColumnDef<Message>[] = [
     cell: ({ row }) => (
       <div className="space-y-1">
         <div className="flex items-center justify-between">
-          <span className="font-semibold">{row.original.customerName}</span>
+          <span className="font-semibold text-white">{row.original.customerName}</span>
           <span className="text-zinc-500">{row.original.time}</span>
         </div>
         <div className="line-clamp-1 text-zinc-400">{row.original.message}</div>
