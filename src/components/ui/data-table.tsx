@@ -1,5 +1,6 @@
 "use client";
 
+import { productAtom } from "@/atoms";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -16,8 +17,8 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
-import { useRouter } from 'next/navigation'
+import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,7 +35,8 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
-  const router = useRouter()
+  const router = useRouter();
+  const [productID, setProductID] = useAtom(productAtom);
 
   return (
     <div>
@@ -63,8 +65,10 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  onClick={() => router.push('/products/' + row.id)}
+                  data-state={row.getIsSelected() ? "selected" : undefined}
+                  onClick={() =>
+                    setProductID((row.original as { id: string }).id)
+                  }
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

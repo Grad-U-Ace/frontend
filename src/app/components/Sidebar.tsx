@@ -9,10 +9,12 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useAtom } from "jotai";
-import { olshopAtom } from "../../atoms";
+import { olshopAtom, productAtom } from "../../atoms";
+import MessageList from "./MessageList";
 
 export default function Sidebar() {
   const [value, setValue] = useAtom(olshopAtom);
+  const [productID, setProductID] = useAtom(productAtom);
 
   const getColor = (value: string) => {
     switch (value) {
@@ -66,6 +68,7 @@ export default function Sidebar() {
             </SelectItem>
           </SelectContent>
         </Select>
+        <MessageList id={productID}/>
       </div>
     </aside>
   );

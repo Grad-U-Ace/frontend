@@ -23,8 +23,7 @@ export const columns: ColumnDef<Product>[] = [
       <img
         src={row.original.thumbnail}
         alt={row.original.name}
-        width={50}
-        height={50}
+        className="size-12 rounded-full"
       />
     ),
   },
