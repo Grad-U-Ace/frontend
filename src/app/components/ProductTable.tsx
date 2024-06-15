@@ -1,7 +1,7 @@
 "use client";
 
 import { olshopAtom } from "@/atoms";
-import { DataTable } from "@/components/ui/data-table";
+import { DataTable } from "@/app/products/data-table";
 import { ecommerceData } from "@/data";
 import { useAtom } from "jotai";
 import { columns, Product } from "../products/columns";
