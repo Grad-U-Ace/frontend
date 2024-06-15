@@ -1,6 +1,10 @@
 import type { Config } from "tailwindcss";
 
 const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+
+const {
   iconsPlugin,
   getIconCollections,
 } = require("@egoist/tailwindcss-icons");
@@ -43,12 +47,21 @@ const config = {
           from: { width: "var(--radix-accordion-content-width)" },
           to: { width: "0" },
         },
+        aurora: {
+          from: {
+            backgroundPosition: "50% 50%, 50% 50%",
+          },
+          to: {
+            backgroundPosition: "350% 50%, 350% 50%",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "accordion-left": "accordion-left 0.2s ease-out",
         "accordion-right": "accordion-right 0.2s ease-out",
+        aurora: "aurora 60s linear infinite",
       },
     },
   },
@@ -58,7 +71,19 @@ const config = {
     iconsPlugin({
       collections: getIconCollections(["ph"]),
     }),
+    addVariablesForColors,
   ],
 } satisfies Config;
+
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
 
 export default config;
