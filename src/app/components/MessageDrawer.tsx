@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { flexRender, Row } from "@tanstack/react-table";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { fetchAIAnswer, fetchTranslation } from "../actions";
+import { fetchAIAnswer, fetchSentiment, fetchSummary, fetchTranslation } from "../actions";
 import type { Message } from "../types";
 
 export default function MessageDrawer({ row }: { row: Row<any> }) {
@@ -22,6 +22,8 @@ export default function MessageDrawer({ row }: { row: Row<any> }) {
   const message: Message = row.original;
   const [answer, setAnswer] = useState<string>("");
   const [translation, setTranslation] = useState<string>("");
+  const [summary, setSummary] = useState<string>("");
+  const [sentiment, setSentiment] = useState<string>("");
 
   return (
     <Drawer shouldScaleBackground>
@@ -98,20 +100,75 @@ export default function MessageDrawer({ row }: { row: Row<any> }) {
               >
                 Terjemahkan
               </Button>
-              <Button className="border border-zinc-500 bg-zinc-500 shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.05)] shadow-zinc-400 hover:border-zinc-600 hover:bg-zinc-600 hover:shadow-zinc-400">
+              <Button
+                className="border border-zinc-500 bg-zinc-500 shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.05)] shadow-zinc-400 hover:border-zinc-600 hover:bg-zinc-600 hover:shadow-zinc-400"
+                onClick={async () => {
+                  const ecommerce = olshop;
+                  const product = message.product_id.toString();
+                  const messageId = message.id.toString();
+                  const summary = await fetchSummary({
+                    ecommerce,
+                    product,
+                    message: messageId,
+                  });
+                  console.log(summary);
+                  setSummary(summary.content);
+                }}
+              >
                 Rangkumkan
               </Button>
+              <Button
+                className="border border-zinc-500 bg-zinc-500 shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.05)] shadow-zinc-400 hover:border-zinc-600 hover:bg-zinc-600 hover:shadow-zinc-400"
+                onClick={async () => {
+                  const ecommerce = olshop;
+                  const product = message.product_id.toString();
+                  const messageId = message.id.toString();
+                  const reply = message.replies[0].id.toString();
+                  const sentiment = await fetchSentiment({
+                    ecommerce,
+                    product,
+                    message: messageId,
+                    reply,
+                  });
+                  console.log(sentiment);
+                  setSentiment(sentiment.content);
+                }}
+              >
+                Sentiment
+              </Button>
             </div>
-            {/* if answer is not null, then display a teal div */}
             {answer && (
-              <div className="rounded-xl bg-teal-500 p-5">
+              <div className="flex items-center justify-between rounded-xl bg-teal-500 p-5">
                 <p className="text-white">{answer}</p>
+                <Button
+                  variant={"ghost"}
+                  className="text-white hover:bg-white/10 hover:text-white"
+                  onClick={() => navigator.clipboard.writeText(answer)}
+                >
+                  Copy
+                </Button>
               </div>
             )}
-            {/* if translation is not null, then display a zinc div */}
             {translation && (
-              <div className="rounded-xl bg-zinc-500 p-5">
+              <div className="flex items-center justify-between rounded-xl bg-zinc-500 p-5">
                 <p className="text-white">{translation}</p>
+                <Button
+                  variant={"ghost"}
+                  className="text-white hover:bg-white/10 hover:text-white"
+                  onClick={() => navigator.clipboard.writeText(translation)}
+                >
+                  Copy
+                </Button>
+              </div>
+            )}
+            {summary && (
+              <div className="flex items-center justify-between rounded-xl bg-zinc-500 p-5">
+                <p className="text-white">{summary}</p>
+              </div>
+            )}
+            {sentiment && (
+              <div className="flex items-center justify-between rounded-xl bg-zinc-500 p-5">
+                <p className="text-white">{sentiment}</p>
               </div>
             )}
           </DrawerDescription>

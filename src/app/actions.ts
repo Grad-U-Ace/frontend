@@ -50,3 +50,43 @@ export async function fetchTranslation({
   const data = await response.json();
   return data;
 }
+
+export async function fetchSummary({
+  ecommerce,
+  product,
+  message,
+}: {
+  ecommerce: string;
+  product: string;
+  message: string;
+}) {
+  const response = await fetch(
+    `http://127.0.0.1:8000/ecommerce/${ecommerce}/product/${product}/message/${message}/summarize`,
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchSentiment({
+  ecommerce,
+  product,
+  message,
+  reply,
+}: {
+  ecommerce: string;
+  product: string;
+  message: string;
+  reply: string;
+}) {
+  const response = await fetch(
+    `http://127.0.0.1:8000/ecommerce/${ecommerce}/product/${product}/message/${message}/reply/${reply}/sentiment`,
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await response.json();
+  return data;
+}
